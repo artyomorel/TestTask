@@ -1,7 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using Microsoft.EntityFrameworkCore;
+using System.Threading.Tasks;
 using TestTask.PostgreSQL.Entities;
 
 namespace TestTask.PostgreSQL.Repository
@@ -15,9 +13,9 @@ namespace TestTask.PostgreSQL.Repository
             _context = context;
         }
 
-        public PFR Get(string Snils)
+        public async Task<PFR> Get(string Snils)
         {
-            return _context.PFRs.FirstOrDefault(x => x.Snils == Snils);
+            return await _context.PFRs.FirstOrDefaultAsync(x => x.Snils == Snils);
         }
     }
 }

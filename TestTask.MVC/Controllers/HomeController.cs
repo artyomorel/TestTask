@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using System;
+using System.Threading.Tasks;
 using TestTask.MVC.Models;
 using TestTask.PostgreSQL.Repository;
 
@@ -12,7 +13,7 @@ namespace TestTask.MVC.Controllers
         private readonly IPersonRepository _personRepository;
         private readonly IMapper _mapper;
 
-        public HomeController(IPFRRepository pfrRepository, IPersonRepository personRepository,IMapper mapper)
+        public HomeController(IPFRRepository pfrRepository, IPersonRepository personRepository, IMapper mapper)
         {
             _pfrRepository = pfrRepository;
             _personRepository = personRepository;
@@ -32,20 +33,24 @@ namespace TestTask.MVC.Controllers
                 return RedirectToAction("Info", "Home", person);
             }
             return View(person);
-            
+
         }
 
-        public IActionResult Info(Person person)
+        public async Task<IActionResult> Info(Person person)
         {
-            if(_personRepository.Get(person.LastName) == null)
+
+            var personDb = await _personRepository.Get(person.LastName);
+            if (personDb == null)
             {
                 var newPerson = _mapper.Map<PostgreSQL.Entities.Person>(person);
-                _personRepository.Add(newPerson);
+                await _personRepository.Add(newPerson);
             }
-            var Pfr = _mapper.Map<PFR>(_pfrRepository.Get(person.Snils));
 
-            Tuple<Person,PFR> tuple = new Tuple<Person, PFR>(person, Pfr);
+            var Pfr = await _pfrRepository.Get(person.Snils);
+            var newPfr = _mapper.Map<PFR>(Pfr);
+            Tuple<Person, PFR> tuple = new Tuple<Person, PFR>(person, newPfr);
             return View(tuple);
+
         }
     }
 }

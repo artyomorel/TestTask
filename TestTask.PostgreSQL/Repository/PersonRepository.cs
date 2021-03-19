@@ -1,7 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using Microsoft.EntityFrameworkCore;
+using System.Threading.Tasks;
 using TestTask.PostgreSQL.Entities;
 
 namespace TestTask.PostgreSQL.Repository
@@ -15,14 +13,16 @@ namespace TestTask.PostgreSQL.Repository
             _context = context;
         }
 
-        public Person Get(string LastName)
+        public async Task<Person> Get(string LastName)
         {
-            return _context.People.FirstOrDefault(x=>x.LastName == LastName);
+            return await _context.People.AsNoTracking().FirstOrDefaultAsync(x=>x.LastName == LastName);
         }
 
-        public void Add(Person person)
+        public async Task<bool> Add(Person person)
         {
-
+            await _context.People.AddAsync(person);
+            await _context.SaveChangesAsync();
+            return true;
         }
     }
 }

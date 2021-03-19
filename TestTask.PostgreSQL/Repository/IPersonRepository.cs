@@ -1,10 +1,11 @@
-﻿using TestTask.PostgreSQL.Entities;
+﻿using System.Threading.Tasks;
+using TestTask.PostgreSQL.Entities;
 
 namespace TestTask.PostgreSQL.Repository
 {
     public interface IPersonRepository
     {
-        Person Get(string LastName);
-        void Add(Person person);
+        Task<Person> Get(string LastName);
+        Task<bool> Add(Person person);
     }
 }

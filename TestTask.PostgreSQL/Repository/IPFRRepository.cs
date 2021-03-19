@@ -1,9 +1,10 @@
-﻿using TestTask.PostgreSQL.Entities;
+﻿using System.Threading.Tasks;
+using TestTask.PostgreSQL.Entities;
 
 namespace TestTask.PostgreSQL.Repository
 {
     public interface IPFRRepository
     {
-        PFR Get(string Snils);
+        Task<PFR> Get(string Snils);
     }
 }
