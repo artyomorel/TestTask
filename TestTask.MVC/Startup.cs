@@ -1,8 +1,10 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using TestTask.PostgreSQL;
 
 namespace TestTask.MVC
 {
@@ -18,6 +20,10 @@ namespace TestTask.MVC
 
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddDbContext<DataContext>(options =>
+            {
+                options.UseNpgsql(_configurtaion.GetConnectionString("DataContext"));
+            });
             services.AddMvc();
         }
 
