@@ -1,14 +1,29 @@
-﻿@{
-    Layout = null;
-}
-<!doctype html>
-<html>
-<head>
-    <title>Hello ASP.NET MVC Core</title>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width">
-</head>
-<body>
-    <h2>Привет мир!</h2>
-</body>
-</html>
+﻿@model Person
+<form method="post" class="text-center">
+    <div class="form-group">
+        <label asp-for="LastName">Фамилия</label>
+        <input name="LastName" class="form-control" asp-for="LastName" />
+    </div>
+    <div class="form-group">
+        <label>Имя</label>
+        <input name="Name" class="form-control" asp-for="Name" />
+    </div>
+    <div class="form-group">
+        <label>Отчество</label>
+        <input name="MiddleName" class="form-control" asp-for="MiddleName" />
+    </div>
+    <div class="form-group">
+        <label>День Рождения</label>
+        <input name="Birthday" type="datetime" class="form-control" asp-for="Birthday" />
+    </div>
+    <div class="form-group">
+        <label>СНИЛС</label>
+        <input name="Snils" type="datetime" class="form-control" asp-for="Snils" />
+    </div>
+    <div class="form-check">
+        <button type="submit" class="btn btn-primary">Sumbit</button>
+        <button type="reset" class="btn btn-warning">Clear</button>
+    </div>
+    
+</form>
+
