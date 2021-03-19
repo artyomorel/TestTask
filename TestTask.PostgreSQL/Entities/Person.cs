@@ -1,7 +1,4 @@
-﻿using System;
-using System.ComponentModel.DataAnnotations;
-
-namespace TestTask.PostgreSQL.Entities
+﻿namespace TestTask.PostgreSQL.Entities
 {
     public class Person
     {
@@ -11,5 +8,7 @@ namespace TestTask.PostgreSQL.Entities
         public string MiddleName { get; set; }
         public string Birthday { get; set; }
         public string Snils { get; set; }
+
+        public PFR Pfr { get; set; }
     }
 }
