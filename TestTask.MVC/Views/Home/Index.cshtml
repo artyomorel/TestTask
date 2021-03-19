@@ -1,29 +1,34 @@
 ﻿@model Person
-<form method="post" class="text-center">
-    <div class="form-group">
-        <label asp-for="LastName">Фамилия</label>
-        <input name="LastName" class="form-control" asp-for="LastName" />
+<div asp-validation-summary="ModelOnly"></div>
+<form method="post" class="row g-3 text-center p-2">
+    <div class="col-md-4">
+        <label class="col-form-label">Фамилия</label>
+        <input type="text" class="form-control" asp-for="LastName"/>
+        <span asp-validation-for="LastName" class="text-danger"></span>
     </div>
-    <div class="form-group">
-        <label>Имя</label>
-        <input name="Name" class="form-control" asp-for="Name" />
+    <div class="col-md-4">
+        <label class="col-form-label" >Имя</label>
+        <input type="text" class="form-control col-xs-3" asp-for="Name" />
+        <span asp-validation-for="Name" class="text-danger"></span>
     </div>
-    <div class="form-group">
-        <label>Отчество</label>
-        <input name="MiddleName" class="form-control" asp-for="MiddleName" />
+    <div class="col-md-4">
+        <label class="col-form-label">Отчество</label>
+        <input type="text" class="form-control" asp-for="MiddleName" />
+        <span asp-validation-for="MiddleName" class="text-danger"></span>
     </div>
-    <div class="form-group">
-        <label>День Рождения</label>
-        <input name="Birthday" type="datetime" class="form-control" asp-for="Birthday" />
+    <div class="col-md-4">
+        <label class="col-form-label">День Рождения</label>
+        <input type="date" class="form-control" asp-for="Birthday"/>
+        <span asp-validation-for="Birthday" class="text-danger"></span>
     </div>
-    <div class="form-group">
-        <label>СНИЛС</label>
-        <input name="Snils" type="datetime" class="form-control" asp-for="Snils" />
+    <div class="col-md-8">
+        <label class="col-form-label">СНИЛС</label>
+        <input type="text" class="form-control" asp-for="Snils" />
+        <span asp-validation-for="Snils" class="text-danger"></span>
     </div>
-    <div class="form-check">
+    <div class="col-12 p-4 ">
         <button type="submit" class="btn btn-primary">Sumbit</button>
         <button type="reset" class="btn btn-warning">Clear</button>
     </div>
-    
-</form>
 
+</form>
