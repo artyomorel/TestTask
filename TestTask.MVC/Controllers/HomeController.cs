@@ -39,11 +39,15 @@ namespace TestTask.MVC.Controllers
         public async Task<IActionResult> Info(Person person)
         {
 
-            var personDb = await _personRepository.Get(person.LastName);
+            var personDb = await _personRepository.Get(person.Snils);
             if (personDb == null)
             {
                 var newPerson = _mapper.Map<PostgreSQL.Entities.Person>(person);
                 await _personRepository.Add(newPerson);
+            }
+            else
+            {
+                person = _mapper.Map<Person>(personDb);
             }
 
             var Pfr = await _pfrRepository.Get(person.Snils);

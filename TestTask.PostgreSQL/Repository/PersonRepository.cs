@@ -13,9 +13,9 @@ namespace TestTask.PostgreSQL.Repository
             _context = context;
         }
 
-        public async Task<Person> Get(string LastName)
+        public async Task<Person> Get(string Snils)
         {
-            return await _context.People.AsNoTracking().FirstOrDefaultAsync(x=>x.LastName == LastName);
+            return await _context.People.AsNoTracking().FirstOrDefaultAsync(x=>x.Snils == Snils);
         }
 
         public async Task<bool> Add(Person person)

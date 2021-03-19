@@ -5,7 +5,7 @@ namespace TestTask.PostgreSQL.Repository
 {
     public interface IPersonRepository
     {
-        Task<Person> Get(string LastName);
+        Task<Person> Get(string Snils);
         Task<bool> Add(Person person);
     }
 }
