@@ -4,8 +4,9 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using TestTask.MVC.AutoMapper;
 using TestTask.PostgreSQL;
-
+using TestTask.PostgreSQL.Repository;
 namespace TestTask.MVC
 {
     public class Startup
@@ -20,10 +21,16 @@ namespace TestTask.MVC
 
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddScoped<IPersonRepository, PersonRepository>();
+            services.AddScoped<IPFRRepository, PFRRepository>();
+
             services.AddDbContext<DataContext>(options =>
             {
                 options.UseNpgsql(_configurtaion.GetConnectionString("DataContext"));
             });
+
+            services.AddAutoMapper(typeof(MVCAutoMapperProfile));
+
             services.AddMvc();
         }
 
