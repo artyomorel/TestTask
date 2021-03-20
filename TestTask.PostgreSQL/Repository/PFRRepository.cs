@@ -17,5 +17,12 @@ namespace TestTask.PostgreSQL.Repository
         {
             return await _context.PFRs.FirstOrDefaultAsync(x => x.Snils == Snils);
         }
+
+        public async Task<bool> Add(PFR Pfr)
+        {
+            await _context.PFRs.AddAsync(Pfr);
+            await _context.SaveChangesAsync();
+            return true;
+        }
     }
 }

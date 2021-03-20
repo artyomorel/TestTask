@@ -36,23 +36,25 @@ namespace TestTask.MVC.Controllers
 
         }
 
-        public async Task<IActionResult> Info(Person person)
+        public async Task<IActionResult> Info(Person personDto)
         {
-
-            var personDb = await _personRepository.Get(person.Snils);
-            if (personDb == null)
+            var Pfr = await _pfrRepository.Get(personDto.Snils);
+            PostgreSQL.Entities.Person personDb;
+            if (Pfr == null)
             {
-                var newPerson = _mapper.Map<PostgreSQL.Entities.Person>(person);
-                await _personRepository.Add(newPerson);
-            }
-            else
-            {
-                person = _mapper.Map<Person>(personDb);
+                var personEntitiesDb = _mapper.Map<PostgreSQL.Entities.Person>(personDto);
+                await _personRepository.Add(personEntitiesDb);
+
+                personDb = await _personRepository.Get(personEntitiesDb.LastName);
+                var personDbId = personDb.PersonId;
+                await _pfrRepository.Add(new PostgreSQL.Entities.PFR { Snils = personDto.Snils ,PersonId = personDbId});
             }
 
-            var Pfr = await _pfrRepository.Get(person.Snils);
+            Pfr = await _pfrRepository.Get(personDto.Snils);
+            personDb = await _personRepository.GetById(Pfr.PersonId);
             var newPfr = _mapper.Map<PFR>(Pfr);
-            Tuple<Person, PFR> tuple = new Tuple<Person, PFR>(person, newPfr);
+            var newPerson = _mapper.Map<Person>(personDb);
+            Tuple<Person, PFR> tuple = new Tuple<Person, PFR>(newPerson, newPfr);
             return View(tuple);
 
         }

@@ -18,8 +18,8 @@
             <td>@Model.Item1.Name</td>
             <td>@Model.Item1.MiddleName</td>
             <td>@Model.Item1.Birthday</td>
-            <td>@Model.Item1.Snils</td>
-            @if (Model.Item2 == null)
+            <td>@Model.Item2.Snils</td>
+            @if (Model.Item2.Sum == null && Model.Item2.Period==null)
             {
                 <td>Отсутствует</td>
                 <td>Отсутствует</td>
@@ -27,7 +27,7 @@
             else
             {
                 <td>@Model.Item2.Sum</td>
-                <td>@Model.Item2.Perio</td>
+                <td>@Model.Item2.Period</td>
             }
         </tr>
     </tbody>

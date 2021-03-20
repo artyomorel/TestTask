@@ -7,7 +7,6 @@
         public string Name { get; set; }
         public string MiddleName { get; set; }
         public string Birthday { get; set; }
-        public string Snils { get; set; }
 
         public PFR Pfr { get; set; }
     }
